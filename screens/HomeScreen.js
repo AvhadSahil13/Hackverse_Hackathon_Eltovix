@@ -83,11 +83,14 @@ const HomeScreen = () => {
           <Text style={styles.menuText}>Share Location</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuItem}>
-          <Text style={styles.menuText}>Rate Us</Text>
+          <Text style={styles.menuText}>Self Defense</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem}>
-          <Text style={styles.menuText}>Refer a Friend</Text>
-        </TouchableOpacity>
+        <TouchableOpacity 
+  style={styles.menuItem} 
+  onPress={() => navigation.navigate("FAQ")}>
+  <Text style={styles.menuText}>FAQ's</Text>
+</TouchableOpacity>
+
         <TouchableOpacity style={styles.logoutButton}>
           <Text style={styles.logoutText}>Log Out</Text>
         </TouchableOpacity>
@@ -143,6 +146,8 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
+
+      
     </View>
   );
 };
