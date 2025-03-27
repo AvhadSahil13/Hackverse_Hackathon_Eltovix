@@ -5,7 +5,10 @@ import SplashScreen from "./screens/SplashScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
-import EmergencyScreen from "./screens/EmergencyScreen"; // Add this if needed
+import ProfileScreen from "./screens/ProfileScreen";
+import EmergencyScreen from "./screens/EmergencyScreen"; 
+import CommunityForumScreen from "./screens/CommunityForumScreen"; 
+import SafeRouteScreen from "./screens/SafeRouteScreen"; 
 
 const Stack = createStackNavigator();
 
@@ -18,6 +21,10 @@ export default function App() {
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Emergency" component={EmergencyScreen} /> 
+        <Stack.Screen name="CommunityForumScreen" component={CommunityForumScreen} />
+        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Stack.Screen name="SafeRouteScreen" component={SafeRouteScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
