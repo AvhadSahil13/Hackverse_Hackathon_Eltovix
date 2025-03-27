@@ -6,7 +6,11 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
 import EmergencyScreen from "./screens/EmergencyScreen"; 
-import FAQ from "./screens/FAQ"; // Import the FAQ screen
+import FAQ from "./screens/FAQ"; 
+import ProfileScreen from "./screens/ProfileScreen";
+import EmergencyScreen from "./screens/EmergencyScreen"; 
+import CommunityForumScreen from "./screens/CommunityForumScreen"; 
+import SafeRouteScreen from "./screens/SafeRouteScreen"; 
 
 const Stack = createStackNavigator();
 
@@ -20,6 +24,9 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Emergency" component={EmergencyScreen} /> 
         <Stack.Screen name="FAQ" component={FAQ} />
+        <Stack.Screen name="CommunityForumScreen" component={CommunityForumScreen} />
+        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Stack.Screen name="SafeRouteScreen" component={SafeRouteScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
