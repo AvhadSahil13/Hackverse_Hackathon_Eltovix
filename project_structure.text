@@ -1,0 +1,61 @@
+- .expo
+  - devices.json
+  - README.md
+- .gitignore
+- App.js
+- app.json
+- assets
+  - adaptive-icon.png
+  - favicon.png
+  - FigmaDesign
+    - calender.jpg
+    - community forum.jpg
+    - home hamburger.jpg
+    - home.jpg
+    - login.jpg
+    - profile.jpg
+    - register.jpg
+    - sos function.jpg
+    - tips page.jpg
+  - icon.png
+  - splash-icon.png
+- index.js
+- package-lock.json
+- package.json
+- project
+  - .bolt
+    - config.json
+  - .gitignore
+  - .prettierrc
+  - app
+    - (app)
+      - (tabs)
+        - index.js
+        - index.tsx
+        - _layout.js
+        - _layout.tsx
+    - (auth)
+      - login.js
+      - login.tsx
+      - register.js
+      - register.tsx
+    - +not-found.js
+    - +not-found.tsx
+    - _layout.js
+    - _layout.tsx
+  - app.json
+  - assets
+    - images
+      - favicon.png
+      - icon.png
+  - hooks
+    - useFrameworkReady.js
+    - useFrameworkReady.ts
+  - package-lock.json
+  - package.json
+  - tsconfig.json
+- README.md
+- screens
+  - EmergencyScreen.js
+  - HomeScreen.js
+- tsconfig.json
