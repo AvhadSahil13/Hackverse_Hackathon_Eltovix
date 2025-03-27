@@ -9,17 +9,11 @@
     "web": "expo start --web"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@react-native-community/datetimepicker": "^8.3.0",
-    "@react-navigation/native": "^7.0.19",
-    "@react-navigation/stack": "^7.2.3",
-    "expo": "~52.0.40",
-=======
     "@react-native-voice/voice": "^3.1.5",
     "@react-navigation/native": "^7.0.19",
     "@react-navigation/stack": "^7.2.3",
     "expo": "52.0.41",
->>>>>>> 5938941e1af3596ef39588c19caa2a33d03c5aae
     "expo-linking": "~7.0.5",
     "expo-location": "~18.0.8",
     "expo-permissions": "^14.4.0",
@@ -35,12 +29,8 @@
     "react-native-screens": "4.4.0",
     "react-native-sms": "^1.12.0",
     "react-native-vector-icons": "^10.2.0",
-<<<<<<< HEAD
-    "react-native-voice": "^0.3.0"
-=======
     "react-native-voice": "^0.3.0",
     "expo-sms": "~13.0.1"
->>>>>>> 5938941e1af3596ef39588c19caa2a33d03c5aae
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

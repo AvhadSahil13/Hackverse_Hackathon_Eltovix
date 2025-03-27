@@ -5,7 +5,6 @@ import SplashScreen from "./screens/SplashScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
-import EmergencyScreen from "./screens/EmergencyScreen"; 
 import FAQ from "./screens/FAQ"; 
 import ProfileScreen from "./screens/ProfileScreen";
 import EmergencyScreen from "./screens/EmergencyScreen"; 
