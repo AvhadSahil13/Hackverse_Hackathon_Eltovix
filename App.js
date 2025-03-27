@@ -10,6 +10,8 @@ import ProfileScreen from "./screens/ProfileScreen";
 import EmergencyScreen from "./screens/EmergencyScreen"; 
 import CommunityForumScreen from "./screens/CommunityForumScreen"; 
 import SafeRouteScreen from "./screens/SafeRouteScreen"; 
+import FakeCalls from "./screens/FakeCalls"; 
+import IncomingCallScreen from "./screens/IncomingCallScreen";
 
 const Stack = createStackNavigator();
 
@@ -26,6 +28,8 @@ export default function App() {
         <Stack.Screen name="CommunityForumScreen" component={CommunityForumScreen} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="SafeRouteScreen" component={SafeRouteScreen} />
+        <Stack.Screen name="FakeCalls" component={FakeCalls} />
+        <Stack.Screen name="IncomingCallScreen" component={IncomingCallScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
