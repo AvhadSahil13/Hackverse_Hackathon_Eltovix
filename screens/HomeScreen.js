@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, Alert, Animated, Dimensions } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Linking from "expo-linking";
 import { useNavigation } from "@react-navigation/native";
 import * as Location from "expo-location";
-import * as Sharing from "expo-sharing";
+import * as SMS from "expo-sms"; // Import SMS module
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -12,6 +12,23 @@ const HomeScreen = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const slideAnim = useState(new Animated.Value(-screenWidth))[0];
   const navigation = useNavigation();
+
+  useEffect(() => {
+    requestPermissions(); // Ask for permissions after login
+  }, []);
+
+  // Function to request necessary permissions
+  const requestPermissions = async () => {
+    const { status: locationStatus } = await Location.requestForegroundPermissionsAsync();
+    const { status: smsStatus } = await SMS.requestPermissionsAsync();
+
+    if (locationStatus !== "granted") {
+      Alert.alert("Permission Denied", "Location permission is required.");
+    }
+    if (smsStatus !== "granted") {
+      Alert.alert("Permission Denied", "SMS permission is required to send emergency messages.");
+    }
+  };
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
@@ -30,31 +47,32 @@ const HomeScreen = () => {
         { text: "Call Police", onPress: () => Linking.openURL("tel:100") },
         { text: "Call Ambulance", onPress: () => Linking.openURL("tel:102") },
         { text: "Call Emergency Contact", onPress: () => Linking.openURL("tel:8010155124") },
-        { text: "Close", onPress: () => console.log("Alert closed"), style: "cancel" }, // Explicit "Close" button
+        { text: "Close", onPress: () => console.log("Alert closed"), style: "cancel" },
       ],
-      { cancelable: true } // Allow tapping outside the alert to dismiss it
+      { cancelable: true }
     );
   };
-  
-  
 
+  // Function to get the current location and send it via SMS
   const shareLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
       Alert.alert("Permission Denied", "Location permission is required to share your location.");
       return;
     }
-
+  
     let location = await Location.getCurrentPositionAsync({});
     const locationUrl = `https://www.google.com/maps?q=${location.coords.latitude},${location.coords.longitude}`;
-
-    if (await Sharing.isAvailableAsync()) {
-      await Sharing.shareAsync(locationUrl);
+    const message = `I need help! My current location is: ${locationUrl}`;
+  
+    const isAvailable = await SMS.isAvailableAsync();
+    if (isAvailable) {
+      await SMS.sendSMSAsync(["8010155124"], message);
     } else {
-      Alert.alert("Sharing Not Available", "Your device does not support sharing.");
+      Alert.alert("SMS Not Available", "Your device does not support sending SMS.");
     }
   };
-
+  
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.sidebar, { left: slideAnim }]}>
@@ -88,17 +106,16 @@ const HomeScreen = () => {
       </View>
 
       <View style={styles.mapContainer}>
-        <MapView style={styles.map} initialRegion={{ latitude: 19.219610, 
-    longitude: 73.164493,
-    latitudeDelta: 0.05,
-    longitudeDelta: 0.05,}}>
-          <Marker coordinate={{ latitude: 19.219610, 
-    longitude: 73.164493 }} title="Aap Yaha Ho" />
+        <MapView style={styles.map} initialRegion={{ 
+          latitude: 19.219610, 
+          longitude: 73.164493,
+          latitudeDelta: 0.05,
+          longitudeDelta: 0.05,
+        }}>
+          <Marker coordinate={{ latitude: 19.219610, longitude: 73.164493 }} title="Aap Yaha Ho" />
         </MapView>
       </View>
 
-
-      {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
         <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate("CommunityForum")}>
           <View style={styles.iconContainer}>
