@@ -4,10 +4,14 @@
     "slug": "your-app",
     "version": "1.0.0",
     "orientation": "portrait",
+<<<<<<< HEAD
+=======
+    "icon": "./assets/logo.png",
+>>>>>>> b5f47b1163b03c3b7fab3edb60fec55500972674
     "userInterfaceStyle": "light",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

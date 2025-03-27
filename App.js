@@ -1,24 +1,22 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import * as SplashScreen from 'expo-splash-screen';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import SplashScreen from "./screens/SplashScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import HomeScreen from "./screens/HomeScreen";
+
+const Stack = createStackNavigator();
 
 export default function App() {
-  useEffect(() => {
-    const prepareApp = async () => {
-      await new Promise(resolve => setTimeout(resolve, 3000)); // Wait 3 sec
-      await SplashScreen.hideAsync();
-    };
-    prepareApp();
-  }, []);
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Welcome to Women Safety App</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#FF3B30' },
-  text: { fontSize: 24, color: 'white', fontWeight: 'bold' },
-});
