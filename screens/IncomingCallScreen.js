@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image, StyleSheet, StatusBar } from "react-native";
 import { Audio } from "expo-av";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const getRandomName = () => {
   const names = ["Rahul Sharma", "Priya Singh", "Amit Patel", "Neha Gupta", "Unknown Caller"];
@@ -15,17 +16,18 @@ const IncomingCallScreen = ({ navigation }) => {
   const [sound, setSound] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [callDuration, setCallDuration] = useState(0);
+  const [timerInterval, setTimerInterval] = useState(null);
   const callerName = getRandomName();
   const callerNumber = getRandomNumber();
-  let timerInterval;
 
   useEffect(() => {
     StatusBar.setHidden(true);
     playRingtone();
+
     return () => {
       stopRingtone();
       StatusBar.setHidden(false);
-      clearInterval(timerInterval); // Clear timer when leaving screen
+      if (timerInterval) clearInterval(timerInterval);
     };
   }, []);
 
@@ -45,8 +47,9 @@ const IncomingCallScreen = ({ navigation }) => {
     }
   };
 
-  const rejectCall = () => {
+  const rejectCall = async () => {
     stopRingtone();
+    await AsyncStorage.removeItem("fakeCallScheduled"); // Clear scheduled call
     navigation.goBack();
   };
 
@@ -58,14 +61,16 @@ const IncomingCallScreen = ({ navigation }) => {
 
   const startCallTimer = () => {
     let seconds = 0;
-    timerInterval = setInterval(() => {
+    const interval = setInterval(() => {
       seconds += 1;
       setCallDuration(seconds);
     }, 1000);
+    setTimerInterval(interval);
   };
 
-  const endCall = () => {
-    clearInterval(timerInterval); // Stop timer
+  const endCall = async () => {
+    if (timerInterval) clearInterval(timerInterval);
+    await AsyncStorage.removeItem("fakeCallScheduled"); // Ensure no duplicate calls
     navigation.goBack();
   };
 
@@ -77,14 +82,12 @@ const IncomingCallScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {/* Caller Information */}
       <View style={styles.callInfo}>
         <Text style={styles.callerName}>{callerName}</Text>
         <Text style={styles.callerNumber}>{callerNumber}</Text>
         <Text style={styles.callingText}>{isAnswered ? formatTime(callDuration) : "Incoming Call..."}</Text>
       </View>
 
-      {/* Accept & Reject Buttons (Hidden when call is answered) */}
       {!isAnswered ? (
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.rejectButton} onPress={rejectCall}>
@@ -98,7 +101,6 @@ const IncomingCallScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       ) : (
-        // End Call Button (Visible only after picking up)
         <TouchableOpacity style={styles.endCallButton} onPress={endCall}>
           <Image source={require("../assets/reject-calls.png")} style={styles.buttonIcon} />
           <Text style={styles.rejectText}>End Call</Text>
@@ -109,75 +111,18 @@ const IncomingCallScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#1C1C1E",
-  },
-
-  callInfo: {
-    position: "absolute",
-    top: "20%",
-    alignItems: "center",
-  },
-
-  callerName: {
-    fontSize: 32,
-    fontWeight: "600",
-    color: "#FFF",
-  },
-
-  callerNumber: {
-    fontSize: 20,
-    color: "#CCC",
-    marginTop: 5,
-  },
-
-  callingText: {
-    fontSize: 18,
-    color: "#A3A3A3",
-    marginTop: 10,
-  },
-
-  buttonContainer: {
-    position: "absolute",
-    bottom: 80,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "80%",
-  },
-
-  rejectButton: {
-    alignItems: "center",
-  },
-
-  acceptButton: {
-    alignItems: "center",
-  },
-
-  endCallButton: {
-    position: "absolute",
-    bottom: 80,
-    alignItems: "center",
-  },
-
-  buttonIcon: {
-    width: 80,
-    height: 80,
-  },
-
-  rejectText: {
-    color: "#FFF",
-    fontSize: 16,
-    marginTop: 5,
-  },
-
-  acceptText: {
-    color: "#FFF",
-    fontSize: 16,
-    marginTop: 5,
-  },
+  container: { flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#1C1C1E" },
+  callInfo: { position: "absolute", top: "20%", alignItems: "center" },
+  callerName: { fontSize: 32, fontWeight: "600", color: "#FFF" },
+  callerNumber: { fontSize: 20, color: "#CCC", marginTop: 5 },
+  callingText: { fontSize: 18, color: "#A3A3A3", marginTop: 10 },
+  buttonContainer: { position: "absolute", bottom: 80, flexDirection: "row", justifyContent: "space-around", width: "80%" },
+  rejectButton: { alignItems: "center" },
+  acceptButton: { alignItems: "center" },
+  endCallButton: { position: "absolute", bottom: 80, alignItems: "center" },
+  buttonIcon: { width: 80, height: 80 },
+  rejectText: { color: "#FFF", fontSize: 16, marginTop: 5 },
+  acceptText: { color: "#FFF", fontSize: 16, marginTop: 5 },
 });
 
 export default IncomingCallScreen;

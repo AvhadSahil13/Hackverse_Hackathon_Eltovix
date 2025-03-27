@@ -1,49 +1,112 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-
-const FakeCalls = () => {
-  const navigation = useNavigation();
-
-  const scheduleFakeCall = (delay) => {
-    setTimeout(() => {
-      navigation.navigate("IncomingCallScreen");
-    }, delay);
-  };
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Schedule a Fake Call</Text>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => scheduleFakeCall(0)}
-      >
-        <Text style={styles.buttonText}>Call Immediately</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => scheduleFakeCall(5 * 60 * 1000)}
-      >
-        <Text style={styles.buttonText}>Call in 5 minutes</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => scheduleFakeCall(10 * 60 * 1000)}
-      >
-        <Text style={styles.buttonText}>Call in 10 minutes</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff" },
-  title: { fontSize: 22, fontWeight: "bold", marginBottom: 20 },
-  button: { backgroundColor: "#FF3B30", padding: 15, borderRadius: 10, marginVertical: 10, width: "80%", alignItems: "center" },
-  buttonText: { color: "#fff", fontSize: 18, fontWeight: "bold" },
-});
-
-export default FakeCalls;
+import React from "react";
+ import {
+   View,
+   TouchableOpacity,
+   Image,
+   StyleSheet,
+   Dimensions,
+ } from "react-native";
+ import { useNavigation } from "@react-navigation/native";
+ 
+ const { width } = Dimensions.get("window"); // Get full screen width
+ 
+ const BottomNav = () => {
+   const navigation = useNavigation();
+ 
+   return (
+     <View style={styles.bottomNav}>
+       <TouchableOpacity
+         style={styles.navButton}
+         onPress={() => navigation.navigate("FakeCalls")}
+       >
+         <View style={styles.iconContainer}>
+           <Image
+             source={require("../assets/fake-call.jpeg")}
+             style={styles.navIcon}
+           />
+         </View>
+       </TouchableOpacity>
+ 
+       <TouchableOpacity
+         style={styles.navButton}
+         onPress={() => navigation.navigate("SafeRouteScreen")}
+       >
+         <View style={styles.iconContainer}>
+           <Image
+             source={require("../assets/safe-route-icon.png")}
+             style={styles.navIcon}
+           />
+         </View>
+       </TouchableOpacity>
+ 
+       <TouchableOpacity
+         style={styles.navButton}
+         onPress={() => navigation.navigate("Home")}
+       >
+         <View style={styles.iconContainer}>
+           <Image
+             source={require("../assets/home.png")}
+             style={styles.navIcon}
+           />
+         </View>
+       </TouchableOpacity>
+ 
+       <TouchableOpacity
+         style={styles.navButton}
+         onPress={() => navigation.navigate("CommunityForumScreen")}
+       >
+         <View style={styles.iconContainer}>
+           <Image
+             source={require("../assets/community.jpeg")}
+             style={styles.navIcon}
+           />
+         </View>
+       </TouchableOpacity>
+ 
+       <TouchableOpacity
+         style={styles.navButton}
+         onPress={() => navigation.navigate("ProfileScreen")}
+       >
+         <View style={styles.iconContainer}>
+           <Image
+             source={require("../assets/profile-icon.png")}
+             style={styles.navIcon}
+           />
+         </View>
+       </TouchableOpacity>
+     </View>
+   );
+ };
+ 
+ const styles = StyleSheet.create({
+   bottomNav: {
+     position: "absolute",
+     bottom: 0,
+     left: 0,
+     right: 0,
+     width: width, // Ensure full width
+     flexDirection: "row",
+     justifyContent: "space-around",
+     alignItems: "center",
+     padding: 10,
+     backgroundColor: "#FF3B30",
+     elevation: 5, // Android shadow
+     shadowColor: "#000", // iOS shadow
+     shadowOffset: { width: 0, height: -2 },
+     shadowOpacity: 0.2,
+     shadowRadius: 5,
+     zIndex: 10, // Ensure it's above other content
+   },
+   navButton: { padding: 10 },
+   iconContainer: {
+     width: 50,
+     height: 50,
+     borderRadius: 25,
+     backgroundColor: "white",
+     alignItems: "center",
+     justifyContent: "center",
+   },
+   navIcon: { width: 30, height: 30, borderRadius: 20 },
+ });
+ 
+ export default BottomNav;

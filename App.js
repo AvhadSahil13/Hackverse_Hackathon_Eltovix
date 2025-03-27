@@ -12,25 +12,33 @@ import CommunityForumScreen from "./screens/CommunityForumScreen";
 import SafeRouteScreen from "./screens/SafeRouteScreen"; 
 import FakeCalls from "./screens/FakeCalls"; 
 import IncomingCallScreen from "./screens/IncomingCallScreen";
+import ChatbotScreen from "./screens/ChatbotScreen";
+import { StatusBar } from "react-native";
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Emergency" component={EmergencyScreen} /> 
-        <Stack.Screen name="FAQ" component={FAQ} />
-        <Stack.Screen name="CommunityForumScreen" component={CommunityForumScreen} />
-        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
-        <Stack.Screen name="SafeRouteScreen" component={SafeRouteScreen} />
-        <Stack.Screen name="FakeCalls" component={FakeCalls} />
-        <Stack.Screen name="IncomingCallScreen" component={IncomingCallScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      {/* ✅ Move StatusBar Outside */}
+      <StatusBar backgroundColor="#FF3B30" barStyle="light-content" />
+
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Splash" component={SplashScreen} />
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Register" component={RegisterScreen} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Emergency" component={EmergencyScreen} /> 
+          <Stack.Screen name="FAQ" component={FAQ} />
+          <Stack.Screen name="CommunityForumScreen" component={CommunityForumScreen} />
+          <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+          <Stack.Screen name="SafeRouteScreen" component={SafeRouteScreen} />
+          <Stack.Screen name="FakeCalls" component={FakeCalls} />
+          <Stack.Screen name="IncomingCallScreen" component={IncomingCallScreen} />
+          <Stack.Screen name="ChatbotScreen" component={ChatbotScreen} options={{ title: "Chatbot" }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
