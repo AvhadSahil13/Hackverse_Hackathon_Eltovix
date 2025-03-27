@@ -97,6 +97,7 @@ const HomeScreen = () => {
         </MapView>
       </View>
 
+
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
         <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate("CommunityForum")}>
