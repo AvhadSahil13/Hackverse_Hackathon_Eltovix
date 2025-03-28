@@ -45,10 +45,13 @@ const RegisterScreen = ({ navigation }) => {
       {/* Social Login */}
       <View style={styles.socialContainer}>
         <TouchableOpacity>
-          <Image source={require("../assets/google.png")} style={styles.socialIcon} />
+          <Image source={require("../assets/google.jpg")} style={styles.socialIcon} />
         </TouchableOpacity>
         <TouchableOpacity>
-          <Image source={require("../assets/google.png")} style={styles.socialIcon} />
+          <Image source={require("../assets/facebook.png")} style={styles.socialIcon} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image source={require("../assets/insta.png")} style={styles.socialIcon} />
         </TouchableOpacity>
       </View>
 
@@ -67,6 +70,7 @@ const RegisterScreen = ({ navigation }) => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -104,8 +108,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   socialIcon: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
+    marginTop: 20,
   },
   registerButton: {
     backgroundColor: "#FEE4C4",

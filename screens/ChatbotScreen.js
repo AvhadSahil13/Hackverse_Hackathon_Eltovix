@@ -1,60 +1,53 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from "react-native";
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { WebView } from "react-native-webview";
 
 const ChatbotScreen = () => {
-  const [messages, setMessages] = useState([]);
-  const [inputText, setInputText] = useState("");
-
-  const handleSend = () => {
-    if (!inputText.trim()) return;
-    
-    const newMessages = [...messages, { text: inputText, sender: "user" }];
-    setMessages(newMessages);
-    setInputText("");
-
-    // Simulating chatbot response (You can integrate AI later)
-    setTimeout(() => {
-      setMessages([...newMessages, { text: "I'm here to help! How can I assist you?", sender: "bot" }]);
-    }, 1000);
-  };
+  const chatbaseScript = `
+    (function() {
+      if (!window.chatbase || window.chatbase("getState") !== "initialized") {
+        window.chatbase = (...arguments) => {
+          if (!window.chatbase.q) { window.chatbase.q = []; }
+          window.chatbase.q.push(arguments);
+        };
+        window.chatbase = new Proxy(window.chatbase, {
+          get(target, prop) {
+            if (prop === "q") { return target.q; }
+            return (...args) => target(prop, ...args);
+          }
+        });
+      }
+      const onLoad = function() {
+        const script = document.createElement("script");
+        script.src = "https://www.chatbase.co/embed.min.js";
+        script.id = "YqdX28f9Wu8orNmN_T5o_"; 
+        script.domain = "www.chatbase.co"; 
+        document.body.appendChild(script);
+      };
+      if (document.readyState === "complete") {
+        onLoad();
+      } else {
+        window.addEventListener("load", onLoad);
+      }
+    })();
+  `;
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={messages}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <View style={[styles.messageContainer, item.sender === "user" ? styles.userMessage : styles.botMessage]}>
-            <Text style={styles.messageText}>{item.text}</Text>
-          </View>
-        )}
+      <WebView
+        source={{ uri: "https://www.chatbase.co/chatbot-iframe/YqdX28f9Wu8orNmN_T5o_" }} // Replace with your chatbot URL if different
+        injectedJavaScript={chatbaseScript}
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
       />
-
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Type a message..."
-          value={inputText}
-          onChangeText={setInputText}
-        />
-        <TouchableOpacity style={styles.sendButton} onPress={handleSend}>
-          <Text style={styles.sendButtonText}>Send</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff", padding: 10 },
-  messageContainer: { padding: 10, borderRadius: 10, marginVertical: 5, maxWidth: "80%" },
-  userMessage: { backgroundColor: "#FF3B30", alignSelf: "flex-end" },
-  botMessage: { backgroundColor: "#ddd", alignSelf: "flex-start" },
-  messageText: { color: "white" },
-  inputContainer: { flexDirection: "row", padding: 10, borderTopWidth: 1, borderColor: "#ccc" },
-  input: { flex: 1, borderWidth: 1, borderColor: "#ccc", borderRadius: 20, padding: 10, marginRight: 10 },
-  sendButton: { backgroundColor: "#FF3B30", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20 },
-  sendButtonText: { color: "white", fontWeight: "bold" },
+  container: {
+    flex: 1,
+  },
 });
 
 export default ChatbotScreen;

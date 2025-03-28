@@ -43,7 +43,10 @@ const LoginScreen = ({ navigation }) => {
                     <Image source={require("../assets/google.png")} style={styles.socialIcon} />
                 </TouchableOpacity>
                 <TouchableOpacity>
-                    <Image source={require("../assets/google.png")} style={styles.socialIcon} />
+                    <Image source={require("../assets/facebook.png")} style={styles.socialIcon} />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Image source={require("../assets/insta.png")} style={styles.socialIcon} />
                 </TouchableOpacity>
             </View>
 
@@ -107,9 +110,10 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     socialIcon: {
-        width: 40,
-        height: 40,
-    },
+        width: 30,
+        height: 30,
+        backgroundColor: "transparent",
+      },
     loginButton: {
         backgroundColor: "#FEE4C4",
         paddingVertical: 12,
