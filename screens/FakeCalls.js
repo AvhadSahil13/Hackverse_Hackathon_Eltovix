@@ -65,7 +65,7 @@ const FakeCalls = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff" },
   title: { fontSize: 20, fontWeight: "bold", marginBottom: 20 },
-  button: { backgroundColor: "#FF3B30", padding: 15, margin: 10, borderRadius: 5, width: 200, alignItems: "center" },
+  button: { backgroundColor: "#ff3974", padding: 15, margin: 10, borderRadius: 5, width: 200, alignItems: "center" },
   buttonText: { color: "#fff", fontSize: 16, fontWeight: "bold" },
   disabledButton: { backgroundColor: "#888" },
 });

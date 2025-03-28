@@ -64,7 +64,7 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FAE5C3", // Light beige background
+    backgroundColor: "#ff3974", 
     paddingHorizontal: 20,
     paddingTop: 40,
     alignItems: "center",
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#4B3F2F",
+    color: "#ffffff",
     marginBottom: 10,
   },
   profileContainer: {
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     color: "#4B3F2F",
   },
   logoutButton: {
-    backgroundColor: "#E74C3C",
+    backgroundColor: "black",
     paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 8,

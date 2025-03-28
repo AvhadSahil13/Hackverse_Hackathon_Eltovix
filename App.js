@@ -13,6 +13,8 @@ import SafeRouteScreen from "./screens/SafeRouteScreen";
 import FakeCalls from "./screens/FakeCalls"; 
 import IncomingCallScreen from "./screens/IncomingCallScreen";
 import ChatbotScreen from "./screens/ChatbotScreen";
+import SelfDefenceTut from "./screens/SelfDefenceTut";
+
 import { StatusBar } from "react-native";
 
 const Stack = createStackNavigator();
@@ -20,8 +22,8 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <>
-      {/* ✅ Move StatusBar Outside */}
-      <StatusBar backgroundColor="#FF3B30" barStyle="light-content" />
+      {/*  Move StatusBar Outside */}
+      <StatusBar backgroundColor="#ff3974" barStyle="light-content" />
 
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -37,8 +39,11 @@ export default function App() {
           <Stack.Screen name="FakeCalls" component={FakeCalls} />
           <Stack.Screen name="IncomingCallScreen" component={IncomingCallScreen} />
           <Stack.Screen name="ChatbotScreen" component={ChatbotScreen} options={{ title: "Chatbot" }} />
+          <Stack.Screen name="SelfDefenceTut" component={SelfDefenceTut} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </>
   );
 }
+

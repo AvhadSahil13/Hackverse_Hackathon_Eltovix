@@ -75,7 +75,7 @@ const RegisterScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FF3B30",
+    backgroundColor: "#ff3974",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   registerButtonText: {
-    color: "#FF3B30",
+    color: "#ff3974",
     fontWeight: "bold",
     fontSize: 18,
   },

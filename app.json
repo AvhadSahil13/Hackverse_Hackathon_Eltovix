@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "YourAppName",
+    "name": "WomenSafetyApp",
     "slug": "your-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -27,7 +27,7 @@
         "ACCESS_COARSE_LOCATION",
         "RECORD_AUDIO"
       ],
-      "package": "com.yourcompany.yourapp"
+      "package": "com.sumittech.womensafetyapp"
     },
     "ios": {
       "supportsTablet": true,

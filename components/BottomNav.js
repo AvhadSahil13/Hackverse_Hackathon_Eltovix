@@ -89,7 +89,7 @@ import React from "react";
      justifyContent: "space-around",
      alignItems: "center",
      padding: 10,
-     backgroundColor: "#FF3B30",
+     backgroundColor: "#ff3974",
      elevation: 5, // Android shadow
      shadowColor: "#000", // iOS shadow
      shadowOffset: { width: 0, height: -2 },

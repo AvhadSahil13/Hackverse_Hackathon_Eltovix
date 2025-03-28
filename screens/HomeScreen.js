@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as Location from "expo-location";
 import * as SMS from "expo-sms";
 import BottomNav from "../components/BottomNav";
+import FAQScreen from "./FAQ";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -17,7 +18,7 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const [location, setLocation] = useState(null);
 
-  // ✅ Get real-time location updates
+  //  Get real-time location updates
   useEffect(() => {
     const getLocation = async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
@@ -26,7 +27,7 @@ const HomeScreen = () => {
         return;
       }
 
-      // ✅ Start watching live location
+      //  Start watching live location
       await Location.watchPositionAsync(
         {
           accuracy: Location.Accuracy.High,
@@ -43,14 +44,14 @@ const HomeScreen = () => {
   }, []);
 
   const toggleMenu = () => {
-    setMenuVisible(!menuVisible); // ✅ First update state
+    setMenuVisible(!menuVisible); //  First update state
     Animated.timing(slideAnim, {
       toValue: menuVisible ? -screenWidth : 0,
       duration: 300,
       useNativeDriver: false,
     }).start();
   };
-  
+
 
   const shareLiveLocation = async () => {
     if (!location) {
@@ -70,7 +71,7 @@ const HomeScreen = () => {
     }
   };
 
-  // ✅ SOS Button Functionality
+  // SOS Button Functionality
   const sosAction = () => {
     Alert.alert(
       "Emergency SOS",
@@ -105,7 +106,7 @@ const HomeScreen = () => {
         </View>
       </View>
 
-      {/* ✅ Map Section */}
+      {/*  Map Section */}
       <View style={styles.mapContainer}>
         <MapView style={styles.map} region={location ? {
           latitude: location.coords.latitude,
@@ -123,7 +124,7 @@ const HomeScreen = () => {
           )}
         </MapView>
 
-        {/* ✅ Floating Buttons */}
+        {/*  Floating Buttons */}
         <View style={styles.floatingButtons}>
           <TouchableOpacity style={styles.fabBtn} onPress={() => navigation.navigate("ChatbotScreen")}>
             <Text style={styles.helpText}>URGENT HELP</Text>
@@ -139,32 +140,36 @@ const HomeScreen = () => {
         </View>
       </View>
 
-      {/* ✅ Side Menu */}
-<Animated.View style={[styles.menu, { left: slideAnim }]}>
-  <TouchableOpacity onPress={toggleMenu} style={styles.closeButton}>
-    <Text style={{ fontSize: 24 }}>←</Text>
-  </TouchableOpacity>
+      {/* Side Menu */}
+      <Animated.View style={[styles.menu, { left: slideAnim }]}>
+        <TouchableOpacity onPress={toggleMenu} style={styles.closeButton}>
+          <Text style={{ fontSize: 24 }}>←</Text>
+        </TouchableOpacity>
 
-  <TouchableOpacity onPress={shareLiveLocation} style={styles.menuItem}>
-    <Text style={styles.menuText}>Share Location</Text>
-  </TouchableOpacity>
+        <TouchableOpacity onPress={shareLiveLocation} style={styles.menuItem}>
+          <Text style={styles.menuText}>Share Location</Text>
+        </TouchableOpacity>
 
-  <TouchableOpacity style={styles.menuItem}>
-    <Text style={styles.menuText}>Name</Text>
-  </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("FAQ")} style={styles.menuItem}>
+          <Text style={styles.menuText}>FAQs</Text>
+        </TouchableOpacity>
 
-  <TouchableOpacity style={styles.menuItem}>
-    <Text style={styles.menuText}>Rate us</Text>
-  </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("SelfDefenceTut")} style={styles.menuItem}>
+          <Text style={styles.menuText}>Self Defense Tutorials</Text>
+        </TouchableOpacity>
 
-  <TouchableOpacity style={styles.menuItem}>
-    <Text style={styles.menuText}>Refer to a friend</Text>
-  </TouchableOpacity>
+        <TouchableOpacity style={styles.menuItem}>
+          <Text style={styles.menuText}>Rate us</Text>
+        </TouchableOpacity>
 
-  <TouchableOpacity onPress={() => console.log("Logout")} style={styles.logoutButton}>
-    <Text style={styles.logoutText}>Log Out</Text>
-  </TouchableOpacity>
-</Animated.View>
+        <TouchableOpacity style={styles.menuItem}>
+          <Text style={styles.menuText}>Refer to a friend</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => console.log("Logout")} style={styles.logoutButton}>
+          <Text style={styles.logoutText}>Log Out</Text>
+        </TouchableOpacity>
+      </Animated.View>
 
 
       <BottomNav />
@@ -174,11 +179,11 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
-  safeArea: { backgroundColor: "#FF3B30" },
+  safeArea: { backgroundColor: "#ff3974" },
   topBar: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", padding: 15 },
   title: { fontSize: 20, fontWeight: "bold", color: "white", textAlign: "center", flex: 1 },
   sosButton: { backgroundColor: "white", paddingVertical: 5, paddingHorizontal: 15, borderRadius: 20 },
-  sosText: { color: "#FF3B30", fontWeight: "bold" },
+  sosText: { color: "#ff3974", fontWeight: "bold" },
   hamburgerContainer: { width: 30, height: 30, justifyContent: "center", alignItems: "center" },
   hamburgerIcon: { width: 40, height: 40, tintColor: "white", transform: [{ rotateY: "180deg" }] },
   helpText: { paddingVertical: 5, paddingHorizontal: 5, borderRadius: 20, color: "white", textAlign: "center", fontWeight: "bold" },
@@ -194,7 +199,7 @@ const styles = StyleSheet.create({
   },
 
   fab: {
-    backgroundColor: "#FF3B30",
+    backgroundColor: "#ff3974",
     width: 60,
     height: 60,
     borderRadius: 50,
@@ -207,7 +212,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   fabBtn: {
-    backgroundColor: "#FF3B30",
+    backgroundColor: "#ff3974",
     width: 100,
     height: 100,
     borderRadius: 50,
@@ -223,48 +228,48 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     tintColor: "white",
-  },menu: {
+  }, menu: {
     position: "absolute",
     top: 0,
-    left: -screenWidth, // Initially hidden
-    width: screenWidth * 0.75, // 75% of screen width
+    left: -screenWidth, 
+    width: screenWidth * 0.75,
     height: "100%",
     backgroundColor: "#E6E6E6",
     paddingTop: 50,
     paddingHorizontal: 20,
     zIndex: 10,
   },
-  
+
   closeButton: {
     position: "absolute",
     top: 15,
     left: 15,
   },
-  
+
   menuItem: {
     paddingVertical: 15,
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
   },
-  
+
   menuText: {
     fontSize: 18,
     fontWeight: "bold",
   },
-  
+
   logoutButton: {
-    backgroundColor: "#FF3B30",
+    backgroundColor: "#ff3974",
     padding: 15,
     borderRadius: 5,
     marginTop: 30,
   },
-  
+
   logoutText: {
     color: "white",
     textAlign: "center",
     fontWeight: "bold",
   },
-  
+
 });
 
 export default HomeScreen;
